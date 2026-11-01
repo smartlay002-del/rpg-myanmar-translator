@@ -16,17 +16,22 @@ app.use(express.json({ limit: "2mb" }));
 // Keep the Google Cloud Translation API key on the server.
 // Set GOOGLE_TRANSLATE_API_KEY in your hosting provider's environment variables.
 async function translateText(text) {
-  const key = process.env.GOOGLE_TRANSLATE_API_KEY;
-  if (!key) throw new Error("Server မှာ Google Translate API key မသတ်မှတ်ရသေးပါ။");
-  const endpoint = `https://translation.googleapis.com/language/translate/v2?key=${encodeURIComponent(key)}`;
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ q: text, source: "en", target: "my", format: "text" })
+  const params = new URLSearchParams({
+    q: text,
+    langpair: "en|my"
   });
+
+  const response = await fetch(
+    `https://api.mymemory.translated.net/get?${params}`
+  );
+
   const data = await response.json();
-  if (!response.ok) throw new Error(data.error?.message || "Translation API error");
-  return data.data.translations[0].translatedText;
+
+  if (!response.ok || data.responseStatus !== 200) {
+    throw new Error(data.responseDetails || "Translation failed");
+  }
+
+  return data.responseData.translatedText;
 }
 
 app.post("/api/translate", async (req, res) => {
