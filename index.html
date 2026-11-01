@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RPG Maker JSON dialogue and choice translator: English to Myanmar.">
+  <title>RPG Myanmar Translator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="logo">RPG</div>
+      <div><h1>RPG Myanmar Translator</h1><p>RPG Maker JSON · English ➜ Myanmar</p></div>
+    </header>
+
+    <section class="panel">
+      <h2>JSON ဖိုင်တင်ပါ</h2>
+      <p class="muted">RPG Maker MV / MZ Map JSON ထဲက Dialogue (Show Text) နဲ့ Choice စာသားတွေကိုပဲ ဘာသာပြန်ပါမယ်။</p>
+      <label class="upload" for="file">JSON ဖိုင်ရွေးရန် <span id="fileName">ဖိုင်မရွေးရသေးပါ</span></label>
+      <input id="file" type="file" accept=".json,application/json">
+      <button id="translate" disabled>ဘာသာပြန်မယ်</button>
+      <div class="progress-wrap"><div id="progress"></div></div>
+      <p id="status" class="status" aria-live="polite"></p>
+      <button id="download" class="secondary" hidden>ဘာသာပြန်ပြီး JSON ဒေါင်းလုဒ်</button>
+    </section>
+
+    <section class="info">
+      <h3>ဘာတွေကို ပြန်မလဲ?</h3>
+      <ul>
+        <li>Dialogue စာသားများ (RPG Maker command 401)</li>
+        <li>Choice ရွေးချယ်စရာများ (command 102)</li>
+      </ul>
+      <p class="warning">ဒီဗားရှင်းမှာ Event Script, ID, Variable, Game Command နဲ့ JSON Key တွေကို မပြောင်းပါ။ Item / Quest database ဖိုင်တွေကို သီးခြား format စစ်ပြီးမှ ထည့်သွင်းရပါမယ်။</p>
+    </section>
+    <footer>API key ကို browser ထဲမထည့်ပါနှင့်။ Server environment variable ထဲတွင်သာ သိမ်းပါ။</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
